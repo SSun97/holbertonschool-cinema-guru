@@ -1,13 +1,19 @@
-
-import './App.css';
-import Button from './components/general/Button';
-import Input from './components/general/Input';
+import React, { useState } from 'react';
+import Authentication from './routes/Authentication';
+import DashBoard from './routes/DashBoard';
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const handleLogin = (e) => {
+    e.preventDefault();
+    setIsLoggedIn(true);
+  };
+  const handleLogOut = (e) => {
+    e.preventDefault();
+    setIsLoggedIn(false);
+  }
   return (
-    <div className="App">
-      <h1>aaa</h1>
-      <Button>Hello World</Button>
-      <Input label='username'/>
+    <div className={App}>
+      {isLoggedIn ? <DashBoard onLogOut={handleLogOut}/> : <Authentication onSubmit={handleLogin}/>}
     </div>
   );
 }
